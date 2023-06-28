@@ -1,0 +1,31 @@
+body {
+  background-image: url("images/bookstore.jpg");
+}
+
+header {
+    height: 200px;
+    width: fit-content;
+}
+
+header h1 {
+    background-color: aliceblue;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+main {
+    margin: 0 100px
+}
+
+.labels {
+    background-color: aliceblue;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    padding: 0 5px;
+}
+
+#bookShowroom {
+    resize: none;
+    width: -webkit-fill-available;
+}
