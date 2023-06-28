@@ -57,7 +57,7 @@ class Biblioteca {
   }
   showBooks() {
     this.libros.forEach((book) => {
-      console.log(book.titulo,",", book.autor);
+      console.log(book.titulo, ",", book.autor);
     });
   }
   addBook({ titulo, autor, paginas, prestado = false, genero, publicado }) {
@@ -71,11 +71,10 @@ class Biblioteca {
     );
   }
   finder(title) {
-    console.log(
-      this.libros.find((book) => {
+    const wantedBook =  this.libros.find((book) => {
         return book.titulo === title;
       })
-    );
+      return wantedBook;
   }
   pageSorter() {
     console.log(
@@ -111,18 +110,36 @@ class Biblioteca {
   }
 
   PagesSum() {
-    const pagesArr = this.libros.map(value => value.paginas);
-    const totalPages = pagesArr.reduce(function(a, b){ return a + b; });
+    const pagesArr = this.libros.map((value) => value.paginas);
+    const totalPages = pagesArr.reduce(function (a, b) {
+      return a + b;
+    });
     console.log(totalPages);
   }
 
-  findByGenre(gen){
-    let genreBooks = this.libros.filter((book) => {
-      if(book.genero === gen) {
+  findByGenre(gen) {
+    const genreBooks = this.libros.filter((book) => {
+      if (book.genero === gen) {
         return book;
       }
-    })
+    });
     console.log(genreBooks);
+  }
+
+  yearsRange(min, max) {
+    const yearRangeLibrary = this.libros.filter((book) => {
+      if (book.publicado >= min && book.publicado <= max) {
+        return book;
+      }
+    });
+    console.log(yearRangeLibrary);
+  }
+
+  deleteBook(title) {
+    let index = this.libros.indexOf(this.finder(title));
+    if (index > -1) {
+      this.libros.splice(index, 1);
+    }
   }
 }
 
@@ -148,11 +165,8 @@ library.addBook({
 library.PagesSum();
 library.isTaken();
 library.findByGenre("Modernismo");
-/* const ex = library.LibraryByAutors();
-let txt = "";
-for (let x in library) {
-txt += JSON.stringify(Object.values(library[x]).titulo) + " ";
-};
-console.log(ex);
-
-document.getElementById("bookShowroom").innerHTML = txt;*/
+library.yearsRange(1945, 1955);
+library.deleteBook("Ulises");
+library.showBooks()
+library.deleteBook("En busca del tiempo perdido");
+library.showBooks()
